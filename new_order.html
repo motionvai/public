@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <title>New Order</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+
+</head>
+<body id="dashboard-body">
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo white-01.png" alt="Delivoo Ex Logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-links" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-links" href="login.html">Login/Signup</a></li>
+                <li class="nav-item"><a class="nav-links" href="services.html">Services</a></li>
+               <!-- <li class="nav-item"><a class="nav-links" href="career.html">Career</a></li>-->
+            </ul>
+            <div class="hamburger" >
+               <!-- <img src="assets/images/delivoo favi-01.png" alt="Menu" >-->
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+               <!-- <span class="bar"></span>-->
+            
+            </div>
+        </nav>
+    </header>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div>
+                <ul>
+                    <li><a href="user_dashboard.html">Order History</a></li>
+                    <li><a href="new_order.html">Create New Order</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="account.html">Account & Payment</a></li>
+                </ul>
+            </div>
+        </aside>        
+        <main class="content">       
+            <section id="new-order">
+                
+                <section id="createOrder">
+                    <h2>Create New Order</h2>
+                    <div class="create-order-container">
+                        
+                        <!-- Order Details Section -->
+                        <div class="order-details">
+                            <label for="orderItem">Order Item:</label>
+                            <input type="text" id="orderItem" placeholder="Enter Item Description" required>
+                            
+                            <label for="orderWeight">Order Weight:</label>
+                            <input type="text" id="orderWeight" placeholder="Enter Item Weight" required>
+                            
+                            <label for="boxSize">Box Size:</label>
+                            <input type="text" id="boxSize" placeholder="Enter Box Size" required>
+                           
+                            <label for="receiverName">Receiver Name:</label>
+                            <input type="text" id="receiverName" placeholder="Enter Receiver Name" required>
+
+                            <label for="reciverPhone">Reciver Phone No.</label>
+                            <input type="tel" id="reciverPhone" placeholder="Enter Receiver phone Number" required>
+                
+                            <label for="deliveryAddress">Delivery Address:</label>
+                            <input type="text" id="deliveryAddress" placeholder="Enter Detail Delivery Address" required>
+                            
+                            <label for="deliveryMap">Delivery Address Google Map link:</label>
+                            <input type="url" id="deliveryMap" placeholder="Enter Delivery Address Map link" required>
+                            
+                            <label for="paymentType">Payment Type:</label>
+                            <select id="paymentType" required>
+                                <option value="COD">Cash on Delivery (COD)</option>
+                                <option value="prepaid">Pre-paid</option>
+                                
+                            </select>
+
+                            <label for="orderAmount">Order Amount:</label>
+                            <input type="text" id="orderAmount" step="11.00" placeholder="Enter amount" required>
+                            
+                        </div>
+                
+                        <!-- Pickup Address Section -->
+                        <div class="pickup-address">
+                            <h3>Pickup Address</h3>
+                            <div id="addressList"></div>
+                            
+                            <button onclick="addAddress()">+ Add New Address</button>
+                            
+                            <div id="newAddressForm" style="display: none;">
+                                <input type="text" id="newName" placeholder="Enter your name">
+                                <input type="text" id="newAddress" placeholder="Enter Detail Address">
+                                <input type="url" id="pickup-map" placeholder="Enter Pickup Map link">
+                                <input type="tel" id="pickup-phone" placeholder="Enter Your Phone Number">
+                                <button onclick="saveAddress()">Save Address</button>
+                            </div>
+                        </div>
+                
+                        <!-- Submit Button -->
+                        <button id="saveAddressButton" onclick="createOrder()">Create Order</button>
+                    </div>
+                </section>
+                
+                <!-- New Order section will be implemented here -->
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo and Description -->
+            <div class="footer-section logo-section">
+                <img src="assets/images/logo white-01.png" alt="DelivooEx Logo" class="footer-logo">
+                <p>On time, every time! DelivooEx offers reliable and affordable parcel delivery for everyone.</p>
+            </div>
+
+            <!-- Quick Links -->
+            
+
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +880-1881147707</p>
+                <p><i class="fas fa-envelope"></i> support@delivooex.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Bhola Sadar, Bhola</p>
+            </div>
+
+            <!-- Social Media and Newsletter -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/delivooex/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 DelivooEx. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!--<script type="module">
+        // Import the functions you need from Firebase SDKs
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDypcHCrpqFsBQULOwAPTdw_L2bvU_ssc4",
+            authDomain: "delivoo-ex.firebaseapp.com",
+            databaseURL: "https://delivoo-ex-default-rtdb.firebaseio.com",
+            projectId: "delivoo-ex",
+            storageBucket: "delivoo-ex.firebasestorage.app",
+            messagingSenderId: "441132716224",
+            appId: "1:441132716224:web:03bdd830b2af05c5275d25",
+            measurementId: "G-M0ZB0MYPYV"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    
+        // Initialize Firestore
+        const db = getFirestore(app);
+    
+        // Global array to store pickup addresses
+        let pickUpaddresses = [];
+    
+        // Function to show the form for adding a new address
+        window.addAddress = function() {
+            document.getElementById('newAddressForm').style.display = 'flex';
+        }
+    
+        // Function to save a new address to the list
+        window.saveAddress = function() {
+            const newAddressInput = document.getElementById('newAddress');
+            const newAddress = newAddressInput.value.trim();
+    
+            if (newAddress) {  // Only add if the address is valid
+                pickUpaddresses.push(newAddress);
+                updateAddressList();
+                
+                // Clear the input field and hide the form
+                newAddressInput.value = '';
+                document.getElementById('newAddressForm').style.display = 'none';
+            } else {
+                alert("Please enter a valid address.");
+            }
+        }
+    
+        // Function to update the address list UI
+        window.updateAddressList = function() {
+            const addressList = document.getElementById('addressList');
+            addressList.innerHTML = '';
+    
+            pickUpaddresses.forEach((address, index) => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="radio" name="pickupAddress" value="${address}" ${index === 0 ? 'checked' : ''}>
+                    ${address}
+                `;
+                addressList.appendChild(label);
+            });
+        }
+    
+        // Function to create an order and store it in Firebase Firestore
+        window.createOrder = async function() {
+            if (pickUpaddresses.length === 0) {
+                alert("Please add a pickup address before creating an order.");
+                return;
+            }
+    
+            // Gather order details
+            const selectedAddress = document.querySelector('input[name="pickupAddress"]:checked').value;
+            const orderData = {
+                orderID: generateUniqueOrderID(),
+                date: new Date(),
+                receiverName: document.getElementById('receiverName').value,
+                deliveryAddress: document.getElementById('deliveryAddress').value,
+                orderItem: document.getElementById('orderItem').value,
+                reciverPhone: document.getElementById('reciverPhone').value,
+                orderAmount: parseFloat(orderAmountInput.value.replace(/,/g, '')),
+                paymentType: document.getElementById('paymentType').value,
+                orderStatus: "Ongoing",
+                pickupAddress: selectedAddress,
+                deliveryMap: document.getElementById('deliveryMap').value,
+                boxSize: document.getElementById('boxSize').value,
+                orderWeight: document.getElementById('orderWeight').value,
+            };
+    
+            try {
+                const docRef = await addDoc(collection(db, "orders"), orderData);
+                console.log("Order created with ID: ", docRef.id);
+                alert("Order created successfully!");
+                resetForm();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Error creating order.");
+            }
+        }
+    
+        // Function to generate a unique order ID
+        window.generateUniqueOrderID = function() {
+            return 'us' + Math.floor(Math.random() * 1000000000) + new Date().getTime();
+        }
+    
+        // Function to reset the form after order submission
+        window.resetForm = function() {
+            document.getElementById('receiverName').value = '';
+            document.getElementById('deliveryAddress').value = '';
+            document.getElementById('deliveryMap').value = '';
+            document.getElementById('orderItem').value = '';
+            document.getElementById('reciverPhone').value = '';
+            document.getElementById('boxSize').value = '';
+            document.getElementById('orderWeight').value = '';
+            orderAmountInput.value = '';
+        }
+    
+        // Function to load saved addresses on page load
+        window.loadAddresses = function() {
+            // Populate pickup addresses from a pre-defined array or storage if needed
+            updateAddressList();
+        }
+    
+        // Load saved addresses when the page loads
+        window.onload = window.loadAddresses;
+    
+    </script>-->
+    
+<script type="module" src="new_order.js"></script>      
+      
+ 
+</body>
+</html>

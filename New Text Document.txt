@@ -1,0 +1,112 @@
+   <!-- <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+        import { getFirestore, collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDypcHCrpqFsBQULOwAPTdw_L2bvU_ssc4",
+            authDomain: "delivoo-ex.firebaseapp.com",
+            databaseURL: "https://delivoo-ex-default-rtdb.firebaseio.com",
+            projectId: "delivoo-ex",
+            storageBucket: "delivoo-ex.firebasestorage.app",
+            messagingSenderId: "441132716224",
+            appId: "1:441132716224:web:03bdd830b2af05c5275d25",
+            measurementId: "G-M0ZB0MYPYV"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        function initializeMenu() {
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+        }
+
+        // Fetch and display order history with filtering
+        async function fetchOrderHistory(user, filters = {}) {
+            try {
+                const ordersRef = collection(db, "orders");
+                let q = query(ordersRef, where("userId", "==", user.uid));
+
+                // Apply filters if provided
+                if (filters.status) q = query(q, where("status", "==", filters.status));
+                if (filters.paymentType) q = query(q, where("paymentType", "==", filters.paymentType));
+                if (filters.date) q = query(q, where("date", "==", filters.date));
+
+                const snapshot = await getDocs(q);
+
+                let totalOrders = 0, completedOrders = 0, pendingOrders = 0;
+                const tbody = document.getElementById("orderHistoryBody");
+                tbody.innerHTML = ""; // Clear current table rows
+
+                snapshot.forEach((doc) => {
+                    const order = doc.data();
+                    totalOrders++;
+                    if (order.status === "completed") completedOrders++;
+                    if (order.status === "ongoing") pendingOrders++;
+
+                    tbody.innerHTML += `<tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.date}</td>
+                        <td>${order.customerName}</td>
+                        <td>${order.customerAddress}</td>
+                        <td>${order.orderItem}</td>
+                        <td>${order.customerPhone}</td>
+                        <td>${order.orderAmount}</td>
+                        <td>${order.paymentType}</td>
+                        <td>${order.status}</td>
+                    </tr>`;
+                });
+
+                document.getElementById("totalOrders").querySelector("p").innerText = totalOrders;
+                document.getElementById("completedOrders").querySelector("p").innerText = completedOrders;
+                document.getElementById("pendingOrders").querySelector("p").innerText = pendingOrders;
+
+            } catch (error) {
+                console.error("Error fetching order history:", error);
+            }
+        }
+
+        // Apply filter values for the query
+        function applyFilters() {
+            const status = document.getElementById("statusFilter").value;
+            const paymentType = document.getElementById("paymentTypeFilter").value;
+            const date = document.getElementById("dateFilter").value;
+
+            const filters = {};
+            if (status) filters.status = status;
+            if (paymentType) filters.paymentType = paymentType;
+            if (date) filters.date = date;
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    fetchOrderHistory(user, filters);
+                } else {
+                    window.location.href = "login.html";
+                }
+            });
+        }
+
+        // Set up initial listeners and fetch data on load
+        document.addEventListener("DOMContentLoaded", () => {
+            initializeMenu();
+
+            // Initial fetch without filters
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    fetchOrderHistory(user);
+                } else {
+                    window.location.href = "login.html";
+                }
+            });
+
+            // Attach filter application to button click
+            document.getElementById("filterButton").addEventListener("click", applyFilters);
+        });
+    </script>-->
