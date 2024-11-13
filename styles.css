@@ -759,7 +759,32 @@ button:hover {
     padding: 20px;
     font-family: Arial, sans-serif;
     color: #333;
+    
 }
+.dashboard-header {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.logout-button {
+    background-color: #ff4d4d; /* Red for visibility */
+    color: white;
+    border: none;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #ff6666; /* Slightly lighter red on hover */
+}
+
 
 #history h2 {
     font-size: 1.8em;
@@ -933,46 +958,49 @@ button:hover {
 .pickup-address {
     border-top: 1px solid #e0e0e0;
     padding-top: 20px;
+    justify-self: first baseline;
 }
 
 #addressList {
     display: grid;
-    gap: 10px;
-}
-
-#addressList label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-#addressList label button {
-    display: flex;
-    position: relative;
-    left: 150px;
-    margin-right: 50px;
-    padding-right: 10px;
-    justify-content: right;
-    margin-left: 30px;
+    gap: 50px;
+    grid-auto-flow: column;
     
 }
+
+/* Align edit and delete buttons within the address list */
+#addressList label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+    width: 100px;
+    justify-content: space-between;
+}
+
+#addressList .button-container {
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+    margin-top: 5px;
+}
+
+#addressList .button-container button {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    left: 150px;
+    cursor: pointer;
+    background-color: #00a241;
+}
+
+
+
 
 #addressList input[type="radio"] {
     margin-right: 10px;
 }
-
-button {
-    padding: 10px 15px;
-    
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
 
 
 #newAddressForm {
@@ -996,4 +1024,138 @@ button {
 }
 #newAddressForm button{
     margin-top: 0;
+}
+
+/*Account-user*/
+
+
+
+/* Main Content Styling */
+.content-main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    display: ruby;
+}
+
+/* General Section Styling */
+.content-main section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: grid;
+}
+
+/* Section Titles */
+.content-main h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Text Styling */
+.content-main p {
+    font-size: 16px;
+    color: #555;
+}
+
+.content-main strong {
+    color: #333;
+}
+
+/* Button Styling */
+.withdraw-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.withdraw-button:hover {
+    background-color: #45a049;
+}
+
+/* Table Styling */
+.cod-management {
+    width: 40%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    position: relative;
+    left: 50px; ;
+    text-align: center;
+    gap: 10px;
+}
+
+.cod-management th, .cod-management td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cod-management th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Package Options */
+.package-options {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    gap: 15px;
+}
+
+.subscription-purchas{
+    width: 100%;
+    display: flex;
+}
+
+.package {
+    
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    
+    height: 250px;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.package:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.package h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.package p {
+    font-size: 14px;
+    color: #555;
+}
+
+.package button {
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.package button:hover {
+    background-color: #45a049;
 }

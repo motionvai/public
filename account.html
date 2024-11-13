@@ -1,15 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <title>New Order</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <script src="https://www.gstatic.com/firebasejs/9.x/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x/firebase-firestore.js"></script>
-
 
 </head>
 <body id="dashboard-body">
@@ -22,57 +20,81 @@
                 <li class="nav-item"><a class="nav-links" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-links" href="login.html">Login/Signup</a></li>
                 <li class="nav-item"><a class="nav-links" href="services.html">Services</a></li>
-               <!-- <li class="nav-item"><a class="nav-links" href="career.html">Career</a></li>-->
+                <li class="nav-item"><a class="nav-links" href="user_dashboard.html">Profile</a></li>
             </ul>
-            <div class="hamburger" >
-               <!-- <img src="assets/images/delivoo favi-01.png" alt="Menu" >-->
+            <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-               <!-- <span class="bar"></span>-->
-            
             </div>
         </nav>
     </header>
+
     <div class="dashboard">
         <aside class="sidebar">
-            <div>
-                <ul>
-                    <li><a href="user_dashboard.html">Order History</a></li>
-                    <li><a href="new_order.html">Create New Order</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="account.html">Account & Payment</a></li>                </ul>
-            </div>
+            <ul>
+                <li><a href="user_dashboard.html">Order History</a></li>
+                <li><a href="new_order.html">Create New Order</a></li>
+                <li><a href="account.html">Account & Payment</a></li>
+            </ul>
         </aside>
-        
-        <main class="content">
-            
-            <section id="account">
-                <h2>Account & Payment Request</h2>
-                <!-- Account and Payment section will be implemented here -->
+
+        <main class="content-main">
+            <!-- Subscription Purchase Section -->
+            <section class="subscription-purchase">
+                <h2>Available Subscription Packages</h2>
+                <div class="package-options" id="package-options">
+                    <!-- Subscription packages will load here dynamically -->
+                </div>
             </section>
+            <!-- Subscription Details Section -->
+            <section class="subscription-details">
+                <h2>Subscription Details</h2>
+                <div class="subscription-info">
+                    <p><strong>Package:</strong> <span id="package-name">Loading...</span></p>
+                    <p><strong>Start Date:</strong> <span id="start-date">Loading...</span></p>
+                    <p><strong>End Date:</strong> <span id="end-date">Loading...</span></p>
+                    <p><strong>Due Deliveries:</strong> <span id="due-deliveries">Loading...</span></p>
+                </div>
+            </section>
+
+            <!-- COD Management Section -->
+            <section class="cod-management">
+                <h2>COD Account</h2>
+                <div class="cod-summary">
+                    <p><strong>Total COD Amount:</strong> $<span id="total-cod">Loading...</span></p>
+                    <button id="withdraw-btn" class="withdraw-button">Request Withdrawal</button>
+                </div>
+                <table id="cod-history-table">
+                    <thead>
+                        <tr>
+                           
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cod-history-body">
+                        <!-- COD history will load here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+
+            
         </main>
     </div>
+
     <footer class="footer">
         <div class="footer-container">
-            <!-- Logo and Description -->
             <div class="footer-section logo-section">
                 <img src="assets/images/logo white-01.png" alt="DelivooEx Logo" class="footer-logo">
                 <p>On time, every time! DelivooEx offers reliable and affordable parcel delivery for everyone.</p>
             </div>
-
-            <!-- Quick Links -->
-            
-
-            <!-- Contact Info -->
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-phone"></i> +880-1881147707</p>
                 <p><i class="fas fa-envelope"></i> support@delivooex.com</p>
                 <p><i class="fas fa-map-marker-alt"></i> Bhola Sadar, Bhola</p>
             </div>
-
-            <!-- Social Media and Newsletter -->
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
@@ -81,15 +103,13 @@
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                
             </div>
         </div>
-
-        <!-- Copyright -->
         <div class="footer-bottom">
             <p>&copy; 2024 DelivooEx. All Rights Reserved.</p>
         </div>
     </footer>
-    <script src="scripts.js" type="module"></script>
+
+    <script src="account.js" type="module"></script>
 </body>
 </html>

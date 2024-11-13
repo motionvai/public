@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 import { getFirestore, collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -19,37 +19,33 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 
 // Authentication state listener
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is logged in, fetch the order history
         console.log("User logged in:", user);
-        fetchOrderHistory();  // Fetch the orders once the user is authenticated
+        fetchOrderHistory(); // Fetch the orders once the user is authenticated
     } else {
-        // If the user is not logged in, redirect to login page
         console.log("User not logged in.");
-        window.location.href = 'login.html';  // Redirect to login page
+        window.location.href = 'login.html'; // Redirect to login page if not authenticated
     }
 });
 
 // Fetch order history from Firebase
 async function fetchOrderHistory(dateFilter = '', statusFilter = 'all', paymentFilter = 'all') {
-    const user = auth.currentUser;  // This will now have the user after auth state change
+    const user = auth.currentUser;
     if (!user) {
         console.error("User is not logged in.");
         return;
     }
 
-    // Correct way to query Firestore with the modular API
     let ordersRef = collection(firestore, "orders");
+    let filters = [where("userId", "==", user.uid)]; // Add user ID filter
 
-    let filters = [where("userId", "==", user.uid)]; // Define filters as an array with an initial filter for user ID
-    
     if (dateFilter) {
         const dateTimestamp = new Date(dateFilter);
         filters.push(where("date", "==", dateTimestamp));
     }
     if (statusFilter !== 'all') {
-        filters.push(where("statusFilter", "==", statusFilter)); // Correct field name here ("statusFilter")
+        filters.push(where("statusFilter", "==", statusFilter));
     }
     if (paymentFilter !== 'all') {
         filters.push(where("paymentType", "==", paymentFilter));
@@ -57,7 +53,7 @@ async function fetchOrderHistory(dateFilter = '', statusFilter = 'all', paymentF
 
     const ordersQuery = query(ordersRef, ...filters);
     const snapshot = await getDocs(ordersQuery);
-    
+
     let totalOrders = 0;
     let completedOrders = 0;
     let pendingOrders = 0;
@@ -69,8 +65,6 @@ async function fetchOrderHistory(dateFilter = '', statusFilter = 'all', paymentF
         const orderDate = order.date ? order.date.toDate().toLocaleDateString() : 'N/A';
 
         totalOrders++;
-
-        // Count based on order statusFilter
         if (order.statusFilter === "completed") completedOrders++;
         if (order.statusFilter === "ongoing") pendingOrders++;
 
@@ -83,7 +77,7 @@ async function fetchOrderHistory(dateFilter = '', statusFilter = 'all', paymentF
             <td>${order.reciverPhone}</td>
             <td>${order.orderAmount}</td>
             <td>${order.paymentType}</td>
-            <td>${order.statusFilter}</td> <!-- Make sure this matches the Firestore field -->
+            <td>${order.statusFilter}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
@@ -101,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Element with ID 'filter-section' not found.");
     }
 
-    // Define the applyFilters function
     function applyFilters() {
         const dateFilter = document.getElementById("dateFilter").value;
         const statusFilter = document.getElementById("statusFilter").value;
@@ -110,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchOrderHistory(dateFilter, statusFilter, paymentFilter);
     }
 
-    // Hamburger menu toggle
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
 
@@ -127,4 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.warn("Hamburger menu elements not found.");
     }
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+        signOut(auth).then(() => {
+            alert("You have been logged out.");
+            window.location.href = "login.html";
+        }).catch((error) => {
+            console.error("Error during logout:", error);
+        });
+    });
 });

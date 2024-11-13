@@ -65,8 +65,10 @@ window.updateAddressList = () => {
             ${item.phone} <br>
             ${item.address} <br>
             ${item.maplink} <br>
-            <button onclick="editAddress('${item.id}')">Edit</button>
-            <button onclick="deleteAddress('${item.id}')">Delete</button>
+            <div class="button-container">
+                <button onclick="editAddress('${item.id}')">Edit</button>
+                <button onclick="deleteAddress('${item.id}')">Delete</button>
+            </div>
         `;
         addressList.appendChild(label);
     });
