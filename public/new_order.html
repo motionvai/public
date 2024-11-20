@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+
+</head>
+<body id="dashboard-new">
+    <!-- Notification Popup -->
+    <div id="notification" >
+        <span id="notification-message"></span>
+    </div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo white-01.png" alt="Delivoo Ex Logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-links" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-links" href="login.html">Login/Signup</a></li>
+                <li class="nav-item"><a class="nav-links" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-links" href="loading.html">Profile</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    <div class="dashboard-ac">
+        <aside class="sidebar" id="sidebar">
+            <select id="sidebarDropdown">
+                <option value="">select one</option>
+                <option value="user_dashboard">Order History</option>
+                <option value="new_order">Create New Order</option>
+                <option value="account">Account & Payment</option>
+            </select>
+        </aside>     
+        <main class="content-order">       
+            
+                
+                <section id="createOrder">
+                    <div id="activeSubscription" style="margin-bottom: 20px;">
+                        <!-- Active subscription details will be dynamically added here -->
+                    </div>
+                    <h2>Create New Order</h2>
+                    <div class="create-order-container">
+                        
+                        <!-- Order Details Section -->
+                        <div class="order-details">
+                            
+                            <label for="orderItem">Order Item:</label>
+                            <input type="text" id="orderItem" placeholder="Enter Item Description" required>
+                            
+                            <label for="orderWeight">Order Weight:</label>
+                            <input type="text" id="orderWeight" placeholder="Enter Item Weight" >
+                            
+                            <label for="boxSize">Box Size:</label>
+                            <input type="text" id="boxSize" placeholder="Enter Box Size" required>
+                           
+                            <label for="receiverName">Receiver Name:</label>
+                            <input type="text" id="receiverName" placeholder="Enter Receiver Name" required>
+
+                            <label for="reciverPhone">Reciver Phone No.</label>
+                            <input type="tel" id="reciverPhone" placeholder="Enter Receiver phone Number" required>
+                
+                            <label for="deliveryAddress">Delivery Address:</label>
+                            <input type="text" id="deliveryAddress" placeholder="Enter Detail Delivery Address" required>
+                            
+                            <label for="deliveryMap">Delivery Address Google Map link:</label>
+                            <input type="url" id="deliveryMap" placeholder="https://maps.app.goo.gl/..........." required>
+                            
+                            <label for="paymentType">Payment Type:</label>
+                            <select id="paymentType" required>
+                                <option value="COD">Cash on Delivery (COD)</option>
+                                <option value="prepaid">Pre-paid</option>
+                                
+                            </select>
+
+                            <label for="orderAmount">Order Amount:</label>
+                            <input type="text" id="orderAmount" step="11.00" placeholder="Enter amount" required>
+                            
+                        </div>
+                
+                        <!-- Pickup Address Section -->
+                        <div class="pickup-address">
+                            <h3>Pickup Address</h3>
+                            <div id="addressList"></div>
+                            
+                            <button onclick="addAddress()">+ Add New Address</button>
+                            
+                            <div id="newAddressForm" style="display: none;">
+                                <input type="text" id="newName" placeholder="Enter your name" required>
+                                <input type="text" id="newAddress" placeholder="Enter Detail Address" required>
+                                <input type="url" id="pickup-map" placeholder="https://maps.app.goo.gl/..........." required>
+                                <input type="tel" id="pickup-phone" placeholder="Enter Your Phone Number" required>
+                                
+                                <button onclick="saveAddress()">Save Address</button>
+                            </div>
+                        </div>
+                
+                        <!-- Submit Button -->
+                        <button id="saveAddressButton" onclick="createOrder()">Create Order</button>
+                    </div>
+                </section>
+                
+                <!-- New Order section will be implemented here -->
+            
+        </main>
+    </div>
+    <footer class="footer-new">
+        <div class="footer-container">
+            <!-- Logo and Description -->
+            <div class="footer-section logo-section">
+                <img src="assets/images/logo white-01.png" alt="DelivooEx Logo" class="footer-logo">
+                <p>On time, every time! DelivooEx offers reliable and affordable parcel delivery for everyone.</p>
+            </div>
+
+            <!-- Quick Links -->
+            
+
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +880-1881147707</p>
+                <p><i class="fas fa-envelope"></i> support@delivooex.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Bhola Sadar, Bhola</p>
+            </div>
+
+            <!-- Social Media and Newsletter -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/delivooex/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 DelivooEx. All Rights Reserved.</p>
+        </div>
+    </footer>
+   
+  
+<script type="module" src="new_order.js"></script>      
+      
+ 
+</body>
+</html>

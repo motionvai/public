@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Career</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="notification" class="notification">
+        <p id="notification-message"></p>
+    </div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo white-01.png" alt="Delivoo Ex Logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-links" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-links" href="login.html">Login/Signup</a></li>
+                <li class="nav-item"><a class="nav-links" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-links" href="career.html">Career</a></li>
+            </ul>
+            <div class="hamburger" >
+               <!-- <img src="assets/images/delivoo favi-01.png" alt="Menu" >-->
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            
+            </div>
+        </nav>
+    </header>
+    
+
+    <div id="career-container">
+        <!-- Navigation and Header -->
+        <h1>Join Our Team</h1>
+        
+        <div class="tabs">
+            <button id="apply-btn" class="tab-button active">Apply as a Rider</button>
+            <button id="login-btn" class="tab-button">Login as a Rider</button>
+        </div>
+
+        <!-- Signup Form -->
+        <section id="apply-section" class="tab-content active">
+            <h2>Application Form</h2>
+            <form id="apply-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="text" placeholder="Phone Number" required>
+                <textarea placeholder="Why do you want to join?" required></textarea>
+                <input type="email" placeholder="Email" required>
+                <input type="password" id="apply-password" placeholder="Password" required>
+                <div>
+                    <input type="checkbox" id="apply-password-chk"> Show Password
+                </div>
+                <label for="role">Select Role:</label>
+                <select id="role" required>
+                    <option value="rider">Rider</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit">Submit Application</button>
+            </form>
+        </section>
+
+        <!-- Login Form -->
+        <section id="login-section" class="tab-content">
+            <h2>Login Form</h2>
+            <form id="login-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div>
+                    <input type="checkbox" id="login-password-chk"> Show Password
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo and Description -->
+            <div class="footer-section logo-section">
+                <img src="assets/images/logo white-01.png" alt="DelivooEx Logo" class="footer-logo">
+                <p>On time, every time! DelivooEx offers reliable and affordable parcel delivery for everyone.</p>
+            </div>
+    
+            <!-- Quick Links -->
+            
+    
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +880-1881147707</p>
+                <p><i class="fas fa-envelope"></i> support@delivooex.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Bhola Sadar, Bhola</p>
+            </div>
+    
+            <!-- Social Media and Newsletter -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/delivooex/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 DelivooEx. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Firebase SDK Scripts -->
+<!-- Firebase Initialization Script -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDypcHCrpqFsBQULOwAPTdw_L2bvU_ssc4",
+        authDomain: "delivoo-ex.firebaseapp.com",
+        projectId: "delivoo-ex",
+        storageBucket: "delivoo-ex.firebasestorage.app",
+        messagingSenderId: "441132716224",
+        appId: "1:441132716224:web:a827b1865b14e497275d25",
+        measurementId: "G-DTBW6E0KZK"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const firestore = getFirestore(app);
+
+    // Toggle password visibility function
+    function togglePasswordVisibility(passwordFieldId, checkbox) {
+        const passwordField = document.getElementById(passwordFieldId);
+        passwordField.type = checkbox.checked ? "text" : "password";
+    }
+
+    // Career Applicant Signup
+    document.getElementById("apply-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = event.target.querySelector("input[type='email']").value;
+        const password = event.target.querySelector("input[type='password']").value;
+        const name = event.target.querySelector("input[placeholder='Full Name']").value;
+        const phone = event.target.querySelector("input[placeholder='Phone Number']").value;
+        const reason = event.target.querySelector("textarea").value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                // Store career applicant details in Firestore under the "career_users" collection
+                return setDoc(doc(firestore, "career_users", user.uid), {
+                    uid: user.uid,
+                    email: user.email,
+                    role: "careerApplicant",
+                    name: name,
+                    phone: phone,
+                    reason: reason
+                });
+            })
+            .then(() => {
+                alert("Application submitted successfully!");
+                event.target.reset();
+            })
+            .catch((error) => {
+                console.error("Error during signup:", error);
+                alert("Error: " + error.message);
+            });
+    });
+
+    // Career Applicant Login
+    document.getElementById("login-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = event.target.querySelector("input[type='email']").value;
+        const password = event.target.querySelector("input[type='password']").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                // Verify user role by checking Firestore
+                return getDoc(doc(firestore, "career_users", user.uid));
+            })
+            .then((docSnapshot) => {
+                if (docSnapshot.exists() && docSnapshot.data().role === "careerApplicant") {
+                    alert("Welcome, Career Applicant!");
+                    // Redirect to the career dashboard or desired page
+                    window.location.href = "/career_dashboard.html";
+                } else {
+                    alert("Access denied: Not a career applicant.");
+                    auth.signOut();
+                }
+            })
+            .catch((error) => {
+                console.error("Error during login:", error);
+                alert("Error: " + error.message);
+            });
+    });
+
+    // Password visibility toggle for apply form
+    document.getElementById("apply-password-chk").addEventListener("change", (event) => {
+        togglePasswordVisibility("apply-password", event.target);
+    });
+
+    // Password visibility toggle for login form
+    document.getElementById("login-password-chk").addEventListener("change", (event) => {
+        togglePasswordVisibility("login-password", event.target);
+    });
+    // Show the login or signup form
+    function showForm(formType) {
+        const signupForm = document.getElementById("signup-form");
+        const loginForm = document.getElementById("login-form");
+        const signupTab = document.getElementById("signup-tab");
+        const loginTab = document.getElementById("login-tab");
+
+        if (formType === "signup") {
+            signupForm.classList.add("active");
+            loginForm.classList.remove("active");
+            signupTab.classList.add("active");
+            loginTab.classList.remove("active");
+        } else if (formType === "login") {
+            loginForm.classList.add("active");
+            signupForm.classList.remove("active");
+            loginTab.classList.add("active");
+            signupTab.classList.remove("active");
+        }
+    }
+    // Event listeners for form toggle buttons
+    document.getElementById("signup-tab").addEventListener("click", () => showForm("signup"));
+    document.getElementById("login-tab").addEventListener("click", () => showForm("login"));
+    window.showForm = showForm;
+    window.togglePasswordVisibility = togglePasswordVisibility;
+</script>
+</body>
+</html>
